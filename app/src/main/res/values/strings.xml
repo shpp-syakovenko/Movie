@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Movie</string>
+    <string name="image_poster_the_movie">Image poster the movie</string>
+    <string name="detail_label_title">Title:</string>
+    <string name="detail_date">Date:</string>
+    <string name="detail_vote_average">Vote average:</string>
+    <string name="detail_overview">Overview:</string>
 </resources>
