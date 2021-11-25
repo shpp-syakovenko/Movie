@@ -8,8 +8,9 @@ import com.squareup.picasso.Picasso
 
 // Load poster from network and insert in to ImageView with helping lib a picasso
 
-@BindingAdapter("posterMovie")
-fun ImageView.loadPoster(url: String?) {
+
+@BindingAdapter("loadPoster")
+fun ImageView.loadImageMovie(url: String?) {
     if (url.isNullOrBlank()) {
         setImageDrawable(null)
     } else {

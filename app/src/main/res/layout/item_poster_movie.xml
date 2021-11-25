@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_poster"
@@ -13,7 +11,8 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/image_poster_the_movie"
         android:adjustViewBounds="true"
-        app:posterMovie="https://www.ubuy.com/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNjFGbStOK05uY0wuX0FDX1NMMTAwOF8uanBn.jpg"
+        app:loadPoster="@{`https://www.ubuy.com/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNjFGbStOK05uY0wuX0FDX1NMMTAwOF8uanBn.jpg`}"
+
         />
 </layout>
 
