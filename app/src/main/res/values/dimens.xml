@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_horizontal">16dp</dimen>
+    <dimen name="margin_vertical">14dp</dimen>
+    <dimen name="large_text">16sp</dimen>
+    <dimen name="medium_text">14sp</dimen>
+    <dimen name="space_words_horizontal">8dp</dimen>
+    <dimen name="ripple_effect_radius">4dp</dimen>
+</resources>

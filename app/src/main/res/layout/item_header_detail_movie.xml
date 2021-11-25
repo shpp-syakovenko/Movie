@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/detail_container_item">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_poster"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_poster_detail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/image_poster_the_movie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header_poster">
+
+            <TextView
+                android:id="@+id/tv_detail_label_title"
+                android:text="@string/detail_label_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/header_desc"
+                style="@style/detail_label" />
+
+            <TextView
+                android:id="@+id/tv_detail_title"
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_title"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Title the movies"
+                style="@style/detail_desc" />
+
+            <TextView
+                android:id="@+id/tv_detail_label_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_title"
+                android:text="@string/detail_date"
+                style="@style/detail_label" />
+
+            <TextView
+                android:id="@+id/tv_detail_date"
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_date"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="25:05:2018"
+                style="@style/detail_desc" />
+
+            <TextView
+                android:id="@+id/tv_detail_label_vote_average"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_date"
+                android:text="@string/detail_vote_average"
+                style="@style/detail_label" />
+
+            <TextView
+                android:id="@+id/tv_detail_vote_average"
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_vote_average"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_vote_average"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Title the movies"
+                style="@style/detail_desc" />
+
+            <TextView
+                android:id="@+id/tv_detail_label_overview"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_vote_average"
+                android:text="@string/detail_overview"
+                style="@style/detail_label" />
+
+            <TextView
+                android:id="@+id/tv_detail_overview"
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_overview"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_overview"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Title the movies"
+                style="@style/detail_desc" />
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
