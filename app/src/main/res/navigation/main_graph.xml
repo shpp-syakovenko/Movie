@@ -15,5 +15,9 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.serglife.movie.presentation.ui.detail.DetailFragment"
-        android:label="DetailFragment" />
+        android:label="DetailFragment" >
+        <argument
+            android:name="movie"
+            app:argType="com.serglife.movie.domain.entity.Movie" />
+    </fragment>
 </navigation>

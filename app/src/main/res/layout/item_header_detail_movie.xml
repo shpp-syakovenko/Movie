@@ -5,6 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="movie"
+            type="com.serglife.movie.domain.entity.Movie" />
 
     </data>
 
@@ -18,11 +21,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_poster_detail"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/image_poster_the_movie"
+                app:loadPosterDetail="@{movie.poster_path}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +53,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_detail_label_title"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Title the movies"
+                tools:text="@{movie.title}"
                 style="@style/detail_desc" />
 
             <TextView
@@ -64,7 +68,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_detail_label_date"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_date"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="25:05:2018"
+                android:text="@{movie.title}"
                 style="@style/detail_desc" />
 
             <TextView
@@ -79,7 +83,7 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_detail_label_vote_average"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_vote_average"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Title the movies"
+                android:text="@{String.valueOf(movie.vote_average)}"
                 style="@style/detail_desc" />
 
             <TextView
@@ -94,14 +98,8 @@
                 app:layout_constraintStart_toEndOf="@+id/tv_detail_label_overview"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_overview"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Title the movies"
+                android:text="@{movie.overview}"
                 style="@style/detail_desc" />
-
-
-
-
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

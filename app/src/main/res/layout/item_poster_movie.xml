@@ -4,15 +4,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="movie"
+            type="com.serglife.movie.domain.entity.Movie" />
+    </data>
+
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_poster"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/image_poster_the_movie"
         android:adjustViewBounds="true"
-        app:loadPoster="@{`https://www.ubuy.com/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNjFGbStOK05uY0wuX0FDX1NMMTAwOF8uanBn.jpg`}"
-
+        app:loadPoster="@{movie.poster_path}"
         />
 </layout>
 
