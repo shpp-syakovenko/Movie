@@ -40,7 +40,6 @@ class DetailFragment : Fragment(), ClickTrailerListener{
         initFieldDetail()
         initEvents()
 
-
         vm.loadDetailMovie(args.movie)
         vm.detailItems.observe(viewLifecycleOwner, {
             adapter.submitList(it)
