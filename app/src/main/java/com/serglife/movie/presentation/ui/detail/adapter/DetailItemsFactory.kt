@@ -9,20 +9,29 @@ import com.serglife.movie.core.adapter.TypeItemsFactory
 import com.serglife.movie.core.adapter.TypeViewHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.movie.MovieDataHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.movie.MovieViewHolder
+import com.serglife.movie.presentation.ui.detail.adapter.holder.trailer.TrailerDataHolder
+import com.serglife.movie.presentation.ui.detail.adapter.holder.trailer.TrailerEventsHolder
+import com.serglife.movie.presentation.ui.detail.adapter.holder.trailer.TrailerViewHolder
 
 class DetailItemsFactory : TypeItemsFactory() {
     override fun getDataHolderType(holder: TypeDataHolder) =
-        when(holder){
+        when (holder) {
             is MovieDataHolder -> TYPE_MOVIE
+            is TrailerDataHolder -> TYPE_TRAILER
             else -> throw RuntimeException("$holder is can't parse type for holder")
         }
 
     override fun bindHolders(viewHolder: TypeViewHolder, dataHolder: TypeDataHolder) {
-        val type = getDataHolderType(dataHolder)
 
-        when(type){
+        val type = getDataHolderType(dataHolder)
+        val eventHolder = eventHolders[type]
+        when (type) {
             TYPE_MOVIE -> {
                 (viewHolder as MovieViewHolder).bind(dataHolder as MovieDataHolder)
+            }
+            TYPE_TRAILER -> {
+                (viewHolder as TrailerViewHolder)
+                    .bind(dataHolder as TrailerDataHolder, eventHolder as? TrailerEventsHolder)
             }
         }
     }
@@ -33,19 +42,32 @@ class DetailItemsFactory : TypeItemsFactory() {
         type: Int
     ): TypeViewHolder {
 
-        when(type){
+        when (type) {
             TYPE_MOVIE -> {
-                return MovieViewHolder(LayoutInflater.from(context).inflate(
-                    R.layout.item_header_detail_movie,
-                    parentView,
-                    false))
+                return MovieViewHolder(
+                    LayoutInflater.from(context).inflate(
+                        R.layout.item_header_detail_movie,
+                        parentView,
+                        false
+                    )
+                )
+            }
+            TYPE_TRAILER -> {
+                return TrailerViewHolder(
+                    LayoutInflater.from(context).inflate(
+                        R.layout.item_trailer_detail_movie,
+                        parentView,
+                        false
+                    )
+                )
             }
             else -> throw RuntimeException("")
 
         }
 
     }
-    companion object{
+
+    companion object {
         const val TYPE_MOVIE = 0
         const val TYPE_TRAILER = 1
     }
