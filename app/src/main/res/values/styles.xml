@@ -25,4 +25,23 @@
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/medium_text</item>
     </style>
+
+    <style name="detail_container_card_view" parent="detail_container_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_top_button</item>
+    </style>
+
+    <style name="detail_container_tv_inner_card_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/ripple_effect</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/padding_button_inner_card_view</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

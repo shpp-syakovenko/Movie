@@ -5,4 +5,14 @@
     <string name="detail_date">Date:</string>
     <string name="detail_vote_average">Vote average:</string>
     <string name="detail_overview">Overview:</string>
+    <string name="add_to_favorites">Добавить в закладки.</string>
+    <string name="log_in">log in</string>
+    <string name="log_out">log out</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reg_label_email">Email:</string>
+    <string name="label_password">Password:</string>
+    <string name="registration">Registration</string>
+    <string name="sing_in">Sing in</string>
+    <string name="home">Home</string>
+    <string name="favorites">favorites</string>
 </resources>

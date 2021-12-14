@@ -20,4 +20,24 @@
             android:name="movie"
             app:argType="com.serglife.movie.domain.entity.Movie" />
     </fragment>
+    <fragment
+        android:id="@+id/inLoginFragment"
+        android:name="com.serglife.movie.presentation.ui.login.in.InLoginFragment"
+        android:label="InLoginFragment" >
+        <action
+            android:id="@+id/action_inLoginFragment_to_regLoginFragment"
+            app:destination="@id/regLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/regLoginFragment"
+        android:name="com.serglife.movie.presentation.ui.login.reg.RegLoginFragment"
+        android:label="RegLoginFragment" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.serglife.movie.presentation.ui.favorites.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

@@ -10,22 +10,40 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.serglife.movie.core.adapter.TypeAdapter
 import com.serglife.movie.data.common.ConstantNetwork
 import com.serglife.movie.databinding.FragmentDetailBinding
+import com.serglife.movie.domain.entity.Movie
 import com.serglife.movie.domain.entity.Trailer
 import com.serglife.movie.presentation.ui.detail.adapter.DetailItemsFactory
+import com.serglife.movie.presentation.ui.detail.adapter.holder.movie.MovieEventsHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.trailer.TrailerEventsHolder
+import com.serglife.movie.presentation.ui.detail.adapter.listener.ClickMovieListener
 import com.serglife.movie.presentation.ui.detail.adapter.listener.ClickTrailerListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class DetailFragment : Fragment(), ClickTrailerListener{
+class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
 
     private lateinit var binding: FragmentDetailBinding
     private lateinit var adapter: TypeAdapter
     private val args by navArgs<DetailFragmentArgs>()
     private val vm: DetailViewModel by viewModel()
+
+    private lateinit var database: DatabaseReference
+    private lateinit var auth: FirebaseAuth
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        database = Firebase.database("https://movie-c8b47-default-rtdb.europe-west1.firebasedatabase.app").reference
+        auth = Firebase.auth
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +72,12 @@ class DetailFragment : Fragment(), ClickTrailerListener{
             },
             type = DetailItemsFactory.TYPE_TRAILER
         )
+        adapter.setEventHolder(
+            eventHolder = MovieEventsHolder().apply {
+                movieClickListener = this@DetailFragment
+            },
+            type = DetailItemsFactory.TYPE_MOVIE
+        )
     }
 
     private fun initFieldDetail() {
@@ -66,5 +90,9 @@ class DetailFragment : Fragment(), ClickTrailerListener{
     override fun clickTrailer(trailer: Trailer) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ConstantNetwork.BASE_TRAILER_URL + trailer.key))
         startActivity(intent)
+    }
+
+    override fun clickMovie(movie: Movie) {
+        auth.currentUser?.uid?.let { database.child(it).child("movies").push().setValue(movie) }
     }
 }

@@ -6,4 +6,11 @@
     <dimen name="medium_text">14sp</dimen>
     <dimen name="space_words_horizontal">8dp</dimen>
     <dimen name="ripple_effect_radius">4dp</dimen>
+    <dimen name="margin_top_button">8dp</dimen>
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="corner_radius">16dp</dimen>
+    <dimen name="padding_card_view">2dp</dimen>
+    <dimen name="padding_button_inner_card_view">14dp</dimen>
+    <dimen name="padding_label_start_end">14dp</dimen>
+    <dimen name="padding_edit_reg">14dp</dimen>
 </resources>

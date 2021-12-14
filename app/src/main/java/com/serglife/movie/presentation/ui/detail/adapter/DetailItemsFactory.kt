@@ -8,6 +8,7 @@ import com.serglife.movie.core.adapter.TypeDataHolder
 import com.serglife.movie.core.adapter.TypeItemsFactory
 import com.serglife.movie.core.adapter.TypeViewHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.movie.MovieDataHolder
+import com.serglife.movie.presentation.ui.detail.adapter.holder.movie.MovieEventsHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.movie.MovieViewHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.trailer.TrailerDataHolder
 import com.serglife.movie.presentation.ui.detail.adapter.holder.trailer.TrailerEventsHolder
@@ -27,11 +28,17 @@ class DetailItemsFactory : TypeItemsFactory() {
         val eventHolder = eventHolders[type]
         when (type) {
             TYPE_MOVIE -> {
-                (viewHolder as MovieViewHolder).bind(dataHolder as MovieDataHolder)
+                (viewHolder as MovieViewHolder).bind(
+                    dataHolder as MovieDataHolder,
+                    eventHolder as? MovieEventsHolder
+                )
             }
             TYPE_TRAILER -> {
                 (viewHolder as TrailerViewHolder)
-                    .bind(dataHolder as TrailerDataHolder, eventHolder as? TrailerEventsHolder)
+                    .bind(
+                        dataHolder as TrailerDataHolder,
+                        eventHolder as? TrailerEventsHolder
+                    )
             }
         }
     }

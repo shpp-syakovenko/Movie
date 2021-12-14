@@ -2,9 +2,11 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="movie"
             type="com.serglife.movie.domain.entity.Movie" />
@@ -26,11 +28,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/image_poster_the_movie"
-                app:loadPosterDetail="@{movie.poster_path}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/detail_add_movie"
+                app:loadPosterDetail="@{movie.poster_path}"
                 tools:srcCompat="@tools:sample/avatars" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detail_add_movie"
+                style="@style/detail_container_card_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_poster_detail"
+                cardview:cardBackgroundColor="@color/accent"
+                cardview:cardCornerRadius="@dimen/corner_radius"
+                cardview:cardElevation="@dimen/card_elevation"
+                cardview:contentPadding="@dimen/padding_card_view">
+
+                <TextView
+                    android:id="@+id/add_movie_to_favorites"
+                    style="@style/detail_container_tv_inner_card_view"
+                    android:text="@string/add_to_favorites" />
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,63 +64,63 @@
 
             <TextView
                 android:id="@+id/tv_detail_label_title"
+                style="@style/detail_label"
                 android:text="@string/detail_label_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/header_desc"
-                style="@style/detail_label" />
+                app:layout_constraintTop_toTopOf="@+id/header_desc" />
 
             <TextView
                 android:id="@+id/tv_detail_title"
-                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_title"
+                style="@style/detail_desc"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_title"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="@{movie.title}"
-                style="@style/detail_desc" />
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_title"
+                tools:text="@{movie.title}" />
 
             <TextView
                 android:id="@+id/tv_detail_label_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_detail_title"
+                style="@style/detail_label"
                 android:text="@string/detail_date"
-                style="@style/detail_label" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_title" />
 
             <TextView
                 android:id="@+id/tv_detail_date"
-                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_date"
+                style="@style/detail_desc"
+                android:text="@{movie.title}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_date"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{movie.title}"
-                style="@style/detail_desc" />
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_date" />
 
             <TextView
                 android:id="@+id/tv_detail_label_vote_average"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_detail_date"
+                style="@style/detail_label"
                 android:text="@string/detail_vote_average"
-                style="@style/detail_label" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_date" />
 
             <TextView
                 android:id="@+id/tv_detail_vote_average"
-                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_vote_average"
+                style="@style/detail_desc"
+                android:text="@{String.valueOf(movie.vote_average)}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_vote_average"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{String.valueOf(movie.vote_average)}"
-                style="@style/detail_desc" />
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_vote_average" />
 
             <TextView
                 android:id="@+id/tv_detail_label_overview"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_detail_vote_average"
+                style="@style/detail_label"
                 android:text="@string/detail_overview"
-                style="@style/detail_label" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_vote_average" />
 
             <TextView
                 android:id="@+id/tv_detail_overview"
-                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_overview"
+                style="@style/detail_desc"
+                android:text="@{movie.overview}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_detail_label_overview"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{movie.overview}"
-                style="@style/detail_desc" />
+                app:layout_constraintStart_toEndOf="@+id/tv_detail_label_overview" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

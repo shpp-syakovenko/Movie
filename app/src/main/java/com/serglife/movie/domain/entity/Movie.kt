@@ -7,12 +7,12 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class Movie(
-    val id: Int,
-    val poster_path: String?,
-    val title: String,
-    val overview: String,
-    val vote_average: Double,
-    val release_date: String
+    val id: Int = 1,
+    val poster_path: String? = "",
+    val title: String = "",
+    val overview: String = "",
+    val vote_average: Double = 1.0,
+    val release_date: String = ""
 ):Parcelable, AdapterContentElement{
     override fun areItemTheSame(other: AdapterContentElement): Boolean {
         if(other !is Movie) return false
