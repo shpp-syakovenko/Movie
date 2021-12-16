@@ -49,7 +49,7 @@
                 <TextView
                     android:id="@+id/add_movie_to_favorites"
                     style="@style/detail_container_tv_inner_card_view"
-                    android:text="@string/add_to_favorites" />
+                    app:loadText="@{movie.isFavorites}" />
             </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

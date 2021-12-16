@@ -12,7 +12,8 @@ class Movie(
     val title: String = "",
     val overview: String = "",
     val vote_average: Double = 1.0,
-    val release_date: String = ""
+    val release_date: String = "",
+    var isFavorites: Boolean = false
 ):Parcelable, AdapterContentElement{
     override fun areItemTheSame(other: AdapterContentElement): Boolean {
         if(other !is Movie) return false
@@ -27,6 +28,7 @@ class Movie(
                 && overview == other.overview
                 && vote_average == other.vote_average
                 && release_date == other.release_date
+                && isFavorites == other.isFavorites
     }
 
     override fun equals(other: Any?): Boolean {
@@ -45,6 +47,7 @@ class Movie(
         result = 31 * result + overview.hashCode()
         result = 31 * result + vote_average.hashCode()
         result = 31 * result + release_date.hashCode()
+        result = 31 * result + isFavorites.hashCode()
         return result
     }
 }

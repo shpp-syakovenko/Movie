@@ -1,8 +1,12 @@
 package com.serglife.movie.presentation.common.ext
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
+import com.serglife.movie.R
 import com.squareup.picasso.Picasso
 
 
@@ -32,5 +36,14 @@ fun AppCompatImageView.loadImageMovieDetail(url: String?) {
             .get()
             .load(url)
             .into(this)
+    }
+}
+
+@BindingAdapter("loadText")
+fun TextView.loadText(isFavorites: Boolean){
+    if(isFavorites){
+        this.text = this.context.getString(R.string.delete_to_favorites)
+    }else{
+        this.text = this.context.getString(R.string.add_to_favorites)
     }
 }

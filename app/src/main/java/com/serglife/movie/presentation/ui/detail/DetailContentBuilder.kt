@@ -43,8 +43,5 @@ class DetailContentBuilder {
             items.addAll(trailers.map{ TrailerDataHolder(it) })
             contentItems.postValue(items)
         }
-
     }
-
-
 }

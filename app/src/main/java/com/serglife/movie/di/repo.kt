@@ -1,12 +1,12 @@
 package com.serglife.movie.di
 
-import com.serglife.movie.data.repositoryImpl.RepoFavoritesImpl
-import com.serglife.movie.data.repositoryImpl.RepoMoviesImpl
-import com.serglife.movie.data.repositoryImpl.RepoTrailersImpl
+import com.serglife.movie.data.repositoryImpl.*
 import org.koin.dsl.module
 
 val repo = module {
     single { RepoMoviesImpl(get(), get()) }
     single { RepoTrailersImpl(get(), get()) }
     single { RepoFavoritesImpl(get()) }
+    single { DeleteFavoritesImpl(get()) }
+    single { AddFavoritesImpl(get()) }
 }
