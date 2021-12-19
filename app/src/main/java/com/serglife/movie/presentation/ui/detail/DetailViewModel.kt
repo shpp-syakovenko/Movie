@@ -31,15 +31,17 @@ class DetailViewModel(
     private val contentBuilder = DetailContentBuilder()
     val detailItems:LiveData<MutableList<TypeDataHolder>> = contentBuilder.contentItems
 
-    fun deleteFavorites(movie: Movie){
+    fun deleteFavorites(movie: Movie, function: () -> Unit){
         viewModelScope.launch {
             deleteFavoritesMovieUseCase(movie)
+            function()
         }
     }
 
-    fun addFavorites(movie:Movie){
+    fun addFavorites(movie:Movie, function: () -> Unit){
         viewModelScope.launch {
             addFavoritesMovieUseCase(movie)
+            function()
         }
     }
 

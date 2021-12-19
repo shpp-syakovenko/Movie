@@ -3,6 +3,7 @@ package com.serglife.movie.presentation.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,13 +52,18 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
         super.onViewCreated(view, savedInstanceState)
 
         initFieldDetail()
-        isFavoritesMovie(args.movie) {
-            loadDetailMovie(it)
-        }
+        isFavoritesMovie()
         initEvents()
 
         vm.detailItems.observe(viewLifecycleOwner, {
             adapter.submitList(it)
+        })
+
+        vm.moviesFavorites.observe(viewLifecycleOwner, { listMovie ->
+            Log.i("TEST", listMovie.size.toString())
+            val newMovie = args.movie.clone()
+            newMovie.isFavorites = listMovie.any { it.id == args.movie.id }
+            loadDetailMovie(newMovie)
         })
     }
 
@@ -68,15 +74,12 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
         binding.rvDetailMovie.adapter = adapter
     }
 
-    private fun isFavoritesMovie(movie: Movie, function: (Movie) -> Unit) {
+    private fun isFavoritesMovie() {
         vm.loadFavoritesMovie()
-        vm.moviesFavorites.observe(viewLifecycleOwner, { listMovie ->
-            movie.isFavorites = listMovie.any { it.id == movie.id }
-            function(movie)
-        })
     }
 
     private fun loadDetailMovie(movie: Movie) {
+        Log.i("TEST","loadDetailMovie: ${movie.isFavorites}")
         vm.loadDetailMovie(movie)
     }
 
@@ -98,11 +101,16 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
     override fun clickAddOrDeleteMovieFromFavorites(movie: Movie) {
         if (auth.currentUser != null) {
             if (movie.isFavorites) {
-                vm.deleteFavorites(movie)
-                Toast.makeText(context, "This movie is in favorites!!!", Toast.LENGTH_SHORT).show()
+                vm.deleteFavorites(movie){
+                    Toast.makeText(context, "This movie delete from favorites!!!", Toast.LENGTH_SHORT).show()
+                    isFavoritesMovie()
+                }
+
             } else {
-                vm.addFavorites(movie)
-                Toast.makeText(context, "This movie add to favorites!!!", Toast.LENGTH_SHORT).show()
+                vm.addFavorites(movie){
+                    Toast.makeText(context, "This movie add to favorites!!!", Toast.LENGTH_SHORT).show()
+                    isFavoritesMovie()
+                }
             }
         } else {
             findNavController().navigate(R.id.inLoginFragment)

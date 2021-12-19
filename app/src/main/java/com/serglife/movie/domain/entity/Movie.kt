@@ -36,7 +36,15 @@ class Movie(
         if (javaClass != other?.javaClass) return false
 
         other as Movie
+
         if (id != other.id) return false
+        if (poster_path != other.poster_path) return false
+        if (title != other.title) return false
+        if (overview != other.overview) return false
+        if (vote_average != other.vote_average) return false
+        if (release_date != other.release_date) return false
+        if (isFavorites != other.isFavorites) return false
+
         return true
     }
 
@@ -50,4 +58,14 @@ class Movie(
         result = 31 * result + isFavorites.hashCode()
         return result
     }
+
+    fun clone() = Movie(
+        id = id,
+        poster_path = poster_path,
+        title = title,
+        overview = overview,
+        vote_average = vote_average,
+        release_date = release_date,
+        isFavorites = isFavorites
+    )
 }

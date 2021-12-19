@@ -62,13 +62,31 @@ class DataBaseMovie {
                     }
                 }
                 override fun onCancelled(error: DatabaseError) {}
-
             })
     }
 
     fun addFavorites(movie: Movie){
-        auth.currentUser?.uid?.let {
-            database.child(it).child("movies").push().setValue(movie)
-        }
+        database = Firebase.database.reference
+        auth = Firebase.auth
+        var isItMovie = false
+
+        database.child(auth.uid.toString()).child("movies")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    snapshot.children.forEach {
+                        val movieBd= it.getValue(Movie::class.java)
+                            ?: throw RuntimeException("Not to convert!!!!!!!!!")
+                        isItMovie = movie.id == movieBd.id
+                    }
+                    if(!isItMovie){
+                        auth.currentUser?.uid?.let {
+                            database.child(it).child("movies").push().setValue(movie)
+                        }
+                    }
+                }
+                override fun onCancelled(error: DatabaseError) {}
+            })
+
     }
 }
