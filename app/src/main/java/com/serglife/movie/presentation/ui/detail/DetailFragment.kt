@@ -52,7 +52,6 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
         super.onViewCreated(view, savedInstanceState)
 
         initFieldDetail()
-        isFavoritesMovie()
         initEvents()
 
         vm.detailItems.observe(viewLifecycleOwner, {
@@ -60,7 +59,6 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
         })
 
         vm.moviesFavorites.observe(viewLifecycleOwner, { listMovie ->
-            Log.i("TEST", listMovie.size.toString())
             val newMovie = args.movie.clone()
             newMovie.isFavorites = listMovie.any { it.id == args.movie.id }
             loadDetailMovie(newMovie)
@@ -74,12 +72,8 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
         binding.rvDetailMovie.adapter = adapter
     }
 
-    private fun isFavoritesMovie() {
-        vm.loadFavoritesMovie()
-    }
 
     private fun loadDetailMovie(movie: Movie) {
-        Log.i("TEST","loadDetailMovie: ${movie.isFavorites}")
         vm.loadDetailMovie(movie)
     }
 
@@ -103,13 +97,12 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
             if (movie.isFavorites) {
                 vm.deleteFavorites(movie){
                     Toast.makeText(context, "This movie delete from favorites!!!", Toast.LENGTH_SHORT).show()
-                    isFavoritesMovie()
+
                 }
 
             } else {
                 vm.addFavorites(movie){
                     Toast.makeText(context, "This movie add to favorites!!!", Toast.LENGTH_SHORT).show()
-                    isFavoritesMovie()
                 }
             }
         } else {

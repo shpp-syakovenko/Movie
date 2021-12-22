@@ -1,8 +1,9 @@
 package com.serglife.movie.domain.repository
 
-import com.serglife.movie.data.common.Either
+
 import com.serglife.movie.domain.entity.Movie
+import kotlinx.coroutines.flow.Flow
 
 interface RepoFavorites {
-   suspend fun getFavoritesMovies(): Either<List<Movie>>
+   fun getFavoritesMovies(): Flow<List<Movie>>
 }

@@ -10,36 +10,38 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.serglife.movie.domain.entity.Movie
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class DataBaseMovie {
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
+    val movies = MutableSharedFlow<List<Movie>>(1, 10)
 
-    suspend fun getFavorites(): List<Movie> {
-        return suspendCoroutine { continuation ->
+    init {
+        listenMovies()
 
-            database = Firebase.database.reference
-            auth = Firebase.auth
-
-            database.child(auth.uid.toString()).child("movies")
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val list = snapshot.children.map {
-                            it.getValue(Movie::class.java)
-                                ?: throw RuntimeException("Not to convert!!!!!!!!!")
-                        }
-                        continuation.resume(list)
-                    }
-
-                    override fun onCancelled(error: DatabaseError) {
-                        continuation.resume(listOf())
-                    }
-                })
-        }
     }
+
+    private fun listenMovies() {
+        database = Firebase.database.reference
+        auth = Firebase.auth
+
+        database.child(auth.uid.toString()).child("movies")
+            .addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val list = snapshot.children.map {
+                        it.getValue(Movie::class.java)
+                            ?: throw RuntimeException("Not to convert!!!!!!!!!")
+                    }
+                    movies.tryEmit(list)
+                }
+                override fun onCancelled(error: DatabaseError) {}
+            })
+    }
+
 
     fun deleteFavorites(fMovie: Movie){
         database = Firebase.database.reference
