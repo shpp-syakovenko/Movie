@@ -10,4 +10,5 @@ val useCase = module {
     single { GetFavoritesMovieUseCase(get<RepoFavoritesImpl>())}
     single { DeleteFavoritesMovieUseCase(get<DeleteFavoritesImpl>()) }
     single { AddFavoritesMovieUseCase(get<AddFavoritesImpl>()) }
+    single { UpdateFavoritesUseCase(get<UpdateFavoritesImpl>()) }
 }

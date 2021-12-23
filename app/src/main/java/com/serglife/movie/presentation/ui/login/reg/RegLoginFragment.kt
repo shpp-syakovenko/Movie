@@ -1,28 +1,20 @@
 package com.serglife.movie.presentation.ui.login.reg
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.serglife.movie.R
+import com.serglife.movie.data.database.AUTH
 import com.serglife.movie.databinding.FragmentRegLoginBinding
 
 
 class RegLoginFragment : Fragment() {
     private lateinit var binding: FragmentRegLoginBinding
-    private lateinit var auth: FirebaseAuth
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        auth = Firebase.auth
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,20 +24,14 @@ class RegLoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentUser = auth.currentUser
+        val currentUser = AUTH.currentUser
         if(currentUser != null){
-            reload()
-
-        }else{
             binding.registration.setOnClickListener {
                 registerUser()
             }
         }
     }
 
-    private fun reload() {
-
-    }
 
     private fun registerUser() {
         val email = binding.regEmail.text.toString().trim()
@@ -60,7 +46,7 @@ class RegLoginFragment : Fragment() {
     }
 
     private fun registerUserToFireBase(email: String, password: String) {
-        auth.createUserWithEmailAndPassword(email, password)
+        AUTH.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(context,"You are logged in.", Toast.LENGTH_SHORT).show()

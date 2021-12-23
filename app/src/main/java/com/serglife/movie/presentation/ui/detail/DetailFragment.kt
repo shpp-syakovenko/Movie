@@ -11,12 +11,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.serglife.movie.R
 import com.serglife.movie.core.adapter.TypeAdapter
 import com.serglife.movie.data.common.ConstantNetwork
+import com.serglife.movie.data.database.AUTH
+import com.serglife.movie.data.database.DataBaseMovie
 import com.serglife.movie.databinding.FragmentDetailBinding
 import com.serglife.movie.domain.entity.Movie
 import com.serglife.movie.domain.entity.Trailer
@@ -34,12 +33,6 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
     private lateinit var adapter: TypeAdapter
     private val args by navArgs<DetailFragmentArgs>()
     private val vm: DetailViewModel by viewModel()
-    private lateinit var auth: FirebaseAuth
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        auth = Firebase.auth
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,11 +51,17 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
             adapter.submitList(it)
         })
 
-        vm.moviesFavorites.observe(viewLifecycleOwner, { listMovie ->
-            val newMovie = args.movie.clone()
-            newMovie.isFavorites = listMovie.any { it.id == args.movie.id }
-            loadDetailMovie(newMovie)
-        })
+
+        if (AUTH.currentUser != null) {
+            vm.updateFavorites()
+            vm.moviesFavorites.observe(viewLifecycleOwner, { listMovie ->
+                val newMovie = args.movie.clone()
+                newMovie.isFavorites = listMovie.any { it.id == args.movie.id }
+                loadDetailMovie(newMovie)
+            })
+        } else {
+            loadDetailMovie(args.movie)
+        }
     }
 
     private fun initFieldDetail() {
@@ -93,16 +92,19 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
     }
 
     override fun clickAddOrDeleteMovieFromFavorites(movie: Movie) {
-        if (auth.currentUser != null) {
+        if (AUTH.currentUser != null) {
             if (movie.isFavorites) {
-                vm.deleteFavorites(movie){
-                    Toast.makeText(context, "This movie delete from favorites!!!", Toast.LENGTH_SHORT).show()
-
+                vm.deleteFavorites(movie) {
+                    Toast.makeText(
+                        context,
+                        "This movie delete from favorites!!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
-
             } else {
-                vm.addFavorites(movie){
-                    Toast.makeText(context, "This movie add to favorites!!!", Toast.LENGTH_SHORT).show()
+                vm.addFavorites(movie) {
+                    Toast.makeText(context, "This movie add to favorites!!!", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         } else {

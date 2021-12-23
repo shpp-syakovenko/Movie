@@ -7,10 +7,7 @@ import com.serglife.movie.data.common.onFailure
 import com.serglife.movie.data.common.onSuccess
 import com.serglife.movie.domain.entity.Movie
 import com.serglife.movie.domain.entity.Trailer
-import com.serglife.movie.domain.usecase.AddFavoritesMovieUseCase
-import com.serglife.movie.domain.usecase.DeleteFavoritesMovieUseCase
-import com.serglife.movie.domain.usecase.GetFavoritesMovieUseCase
-import com.serglife.movie.domain.usecase.GetTrailersByIdUseCase
+import com.serglife.movie.domain.usecase.*
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
@@ -18,6 +15,7 @@ class DetailViewModel(
     private val getFavorites: GetFavoritesMovieUseCase,
     private val deleteFavoritesMovieUseCase: DeleteFavoritesMovieUseCase,
     private val addFavoritesMovieUseCase: AddFavoritesMovieUseCase,
+    private val updateFavoritesUseCase: UpdateFavoritesUseCase
 
     ): ViewModel() {
     val moviesFavorites: LiveData<List<Movie>> = getFavorites().asLiveData()
@@ -37,6 +35,10 @@ class DetailViewModel(
             addFavoritesMovieUseCase(movie)
             function()
         }
+    }
+
+    fun updateFavorites(){
+        updateFavoritesUseCase()
     }
 
     fun loadDetailMovie(movie: Movie){

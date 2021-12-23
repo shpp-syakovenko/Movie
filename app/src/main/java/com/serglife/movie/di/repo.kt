@@ -9,4 +9,5 @@ val repo = module {
     single { RepoFavoritesImpl(get()) }
     single { DeleteFavoritesImpl(get()) }
     single { AddFavoritesImpl(get()) }
+    single { UpdateFavoritesImpl(get())}
 }

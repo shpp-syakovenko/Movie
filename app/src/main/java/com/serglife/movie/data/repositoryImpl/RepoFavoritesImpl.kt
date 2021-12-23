@@ -1,6 +1,6 @@
 package com.serglife.movie.data.repositoryImpl
 
-import com.serglife.movie.data.common.Either
+
 import com.serglife.movie.data.database.DataBaseMovie
 import com.serglife.movie.domain.entity.Movie
 import com.serglife.movie.domain.repository.RepoFavorites
