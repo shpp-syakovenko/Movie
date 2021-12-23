@@ -9,13 +9,11 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.serglife.movie.R
 import com.serglife.movie.data.database.AUTH
-import com.serglife.movie.data.database.DataBaseMovie
 import com.serglife.movie.databinding.FragmentInLoginBinding
 
 class InLoginFragment : Fragment() {
 
     private lateinit var binding: FragmentInLoginBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,11 +26,8 @@ class InLoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         goToRegister()
 
-        val currentUser = AUTH.currentUser
-        if(currentUser == null){
-            binding.inLogin.setOnClickListener {
-                singInUser()
-            }
+        binding.inLogin.setOnClickListener {
+            singInUser()
         }
 
     }
@@ -41,10 +36,10 @@ class InLoginFragment : Fragment() {
         val email = binding.inEmail.text.toString().trim()
         val password = binding.inPassword.text.toString().trim()
 
-        if(isValidEmailAndPassport(email,password)){
-            singInUserToFireBase(email,password)
-        }else{
-            Toast.makeText(context,"Not valid", Toast.LENGTH_SHORT).show()
+        if (isValidEmailAndPassport(email, password)) {
+            singInUserToFireBase(email, password)
+        } else {
+            Toast.makeText(context, "Not valid", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -52,17 +47,17 @@ class InLoginFragment : Fragment() {
         AUTH.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(context,"You are logged in.", Toast.LENGTH_SHORT).show()
-                    DataBaseMovie().listenMovies()
+                    Toast.makeText(context, "You are logged in.", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.moviesFragment)
                 } else {
-                    Toast.makeText(context, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, task.exception?.message.toString(), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
     }
 
     private fun goToRegister() {
-        binding.inRegistration.setOnClickListener{
+        binding.inRegistration.setOnClickListener {
             findNavController().navigate(InLoginFragmentDirections.actionInLoginFragmentToRegLoginFragment())
         }
     }

@@ -9,6 +9,7 @@ import com.serglife.movie.domain.repository.RepoMovies
 import java.lang.Exception
 
 class RepoMoviesImpl(private val mapper: Mapper, private val api: ApiService): RepoMovies {
+
     override suspend fun getMoviesByPage(page: Int): Either<List<Movie>> {
 
         val options = getOptionsMoviePopular(page = page)

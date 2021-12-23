@@ -21,7 +21,7 @@ class ScrollMoreListener(
     }
 
     companion object {
-        const val SCROLL_DIRECTION_UP = -1
+        //const val SCROLL_DIRECTION_UP = -1
         const val SCROLL_DIRECTION_BOTTOM = 1
     }
 }

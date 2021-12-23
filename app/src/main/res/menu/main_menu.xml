@@ -9,12 +9,6 @@
         android:id="@+id/favorites"
         android:title="@string/favorites" />
     <item
-        android:id="@+id/log_in"
-        android:title="@string/log_in" />
-    <item
         android:id="@+id/log_out"
         android:title="@string/log_out" />
-    <item
-        android:id="@+id/current_token"
-        android:title="token" />
 </menu>

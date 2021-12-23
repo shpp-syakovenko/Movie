@@ -6,11 +6,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="movie"
             type="com.serglife.movie.domain.entity.Movie" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout style="@style/detail_container_item">
@@ -124,8 +122,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </layout>

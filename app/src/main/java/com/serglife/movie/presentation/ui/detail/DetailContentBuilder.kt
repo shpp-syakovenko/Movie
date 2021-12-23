@@ -1,6 +1,5 @@
 package com.serglife.movie.presentation.ui.detail
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.serglife.movie.core.adapter.TypeDataHolder
 import com.serglife.movie.domain.entity.Movie

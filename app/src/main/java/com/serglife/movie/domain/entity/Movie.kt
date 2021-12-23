@@ -14,14 +14,14 @@ class Movie(
     val vote_average: Double = 1.0,
     val release_date: String = "",
     var isFavorites: Boolean = false
-):Parcelable, AdapterContentElement{
+) : Parcelable, AdapterContentElement {
     override fun areItemTheSame(other: AdapterContentElement): Boolean {
-        if(other !is Movie) return false
+        if (other !is Movie) return false
         return id == other.id
     }
 
     override fun areContentTheSame(other: AdapterContentElement): Boolean {
-        if(other !is Movie) return false
+        if (other !is Movie) return false
         return id == other.id
                 && poster_path == other.poster_path
                 && title == other.title

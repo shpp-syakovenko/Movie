@@ -11,8 +11,8 @@ import com.serglife.movie.domain.usecase.*
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
+    getFavorites: GetFavoritesMovieUseCase,
     private val getTrailersByIdUseCase: GetTrailersByIdUseCase,
-    private val getFavorites: GetFavoritesMovieUseCase,
     private val deleteFavoritesMovieUseCase: DeleteFavoritesMovieUseCase,
     private val addFavoritesMovieUseCase: AddFavoritesMovieUseCase,
     private val updateFavoritesUseCase: UpdateFavoritesUseCase
@@ -23,17 +23,15 @@ class DetailViewModel(
     private val contentBuilder = DetailContentBuilder()
     val detailItems:LiveData<MutableList<TypeDataHolder>> = contentBuilder.contentItems
 
-    fun deleteFavorites(movie: Movie, function: () -> Unit){
+    fun deleteFavorites(movie: Movie){
         viewModelScope.launch {
             deleteFavoritesMovieUseCase(movie)
-            function()
         }
     }
 
-    fun addFavorites(movie:Movie, function: () -> Unit){
+    fun addFavorites(movie:Movie){
         viewModelScope.launch {
             addFavoritesMovieUseCase(movie)
-            function()
         }
     }
 
@@ -42,7 +40,6 @@ class DetailViewModel(
     }
 
     fun loadDetailMovie(movie: Movie){
-
         viewModelScope.launch {
             contentBuilder.apply {
                 addMovies(listOf(movie))
@@ -53,7 +50,6 @@ class DetailViewModel(
     }
 
     private suspend fun getTrailerById(id:Int): List<Trailer>{
-
         var list = listOf<Trailer>()
         getTrailersByIdUseCase(id)
             .onSuccess { list = it  }

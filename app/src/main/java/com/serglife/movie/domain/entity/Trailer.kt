@@ -7,14 +7,14 @@ class Trailer(
     val id: String,
     val name: String,
     val key: String
-): AdapterContentElement{
+) : AdapterContentElement {
     override fun areItemTheSame(other: AdapterContentElement): Boolean {
-        if(other !is Trailer) return false
+        if (other !is Trailer) return false
         return id == other.id
     }
 
     override fun areContentTheSame(other: AdapterContentElement): Boolean {
-        if(other !is Trailer) return false
+        if (other !is Trailer) return false
         return id == other.id && name == other.name && key == other.key
     }
 

@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -39,34 +38,35 @@ class MainActivity : AppCompatActivity() {
         AUTH = Firebase.auth
         REF_DATABASE_ROOT = Firebase.database.reference
         setContentView(binding.root)
-        val host = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
+        val host =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         navController = host.navController
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
+        if (AUTH.currentUser != null) {
+            menuInflater.inflate(R.menu.main_menu, menu)
+        } else {
+            menuInflater.inflate(R.menu.come_in_menu, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.home -> {
                 navController.navigate(R.id.moviesFragment)
             }
             R.id.favorites -> {
                 navController.navigate(R.id.favoritesFragment)
             }
-            R.id.log_in -> {
+            R.id.come_in -> {
                 navController.navigate(R.id.inLoginFragment)
             }
             R.id.log_out -> {
                 AUTH.signOut()
                 navController.navigate(R.id.moviesFragment)
-                Toast.makeText(this,"You are logged out.", Toast.LENGTH_SHORT).show()
-            }
-            R.id.current_token -> {
-                Toast.makeText(this,"${AUTH.currentUser?.uid}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "You are logged out.", Toast.LENGTH_SHORT).show()
             }
         }
         return super.onOptionsItemSelected(item)

@@ -16,4 +16,5 @@
     <string name="sing_in">Sing in</string>
     <string name="home">Home</string>
     <string name="favorites">favorites</string>
+    <string name="sign_in">signIn</string>
 </resources>

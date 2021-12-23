@@ -20,7 +20,6 @@ class MoviesFragment : Fragment(), OnClickMovieListener {
     private lateinit var adapter: MoviesAdapter
     private val vm: MoviesViewModel by viewModel()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,6 +31,7 @@ class MoviesFragment : Fragment(), OnClickMovieListener {
         super.onViewCreated(view, savedInstanceState)
 
         initField()
+        setHasOptionsMenu(true)
 
         vm.movies.observe(viewLifecycleOwner, { movies ->
             adapter.submitList(movies)

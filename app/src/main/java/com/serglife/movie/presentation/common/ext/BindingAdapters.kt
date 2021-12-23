@@ -1,14 +1,10 @@
 package com.serglife.movie.presentation.common.ext
 
-import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.databinding.BindingAdapter
 import com.serglife.movie.R
 import com.squareup.picasso.Picasso
-
 
 
 // Load poster from network and insert in to ImageView with helping lib a picasso

@@ -34,11 +34,10 @@ class DetailItemsFactory : TypeItemsFactory() {
                 )
             }
             TYPE_TRAILER -> {
-                (viewHolder as TrailerViewHolder)
-                    .bind(
-                        dataHolder as TrailerDataHolder,
-                        eventHolder as? TrailerEventsHolder
-                    )
+                (viewHolder as TrailerViewHolder).bind(
+                    dataHolder as TrailerDataHolder,
+                    eventHolder as? TrailerEventsHolder
+                )
             }
         }
     }
@@ -69,9 +68,7 @@ class DetailItemsFactory : TypeItemsFactory() {
                 )
             }
             else -> throw RuntimeException("")
-
         }
-
     }
 
     companion object {

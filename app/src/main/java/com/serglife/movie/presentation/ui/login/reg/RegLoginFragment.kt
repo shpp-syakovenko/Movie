@@ -19,29 +19,25 @@ class RegLoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentRegLoginBinding.inflate(layoutInflater).also{binding = it}.root
+        return FragmentRegLoginBinding.inflate(layoutInflater).also { binding = it }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currentUser = AUTH.currentUser
-        if(currentUser != null){
-            binding.registration.setOnClickListener {
-                registerUser()
-            }
+
+        binding.registration.setOnClickListener {
+            registerUser()
         }
     }
-
 
     private fun registerUser() {
         val email = binding.regEmail.text.toString().trim()
         val password = binding.regPassword.text.toString().trim()
 
-        if(isValidEmailAndPassport(email,password)){
-            registerUserToFireBase(email,password)
-
-        }else{
-            Toast.makeText(context,"Not valid", Toast.LENGTH_SHORT).show()
+        if (isValidEmailAndPassport(email, password)) {
+            registerUserToFireBase(email, password)
+        } else {
+            Toast.makeText(context, "Not valid", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -49,11 +45,11 @@ class RegLoginFragment : Fragment() {
         AUTH.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(context,"You are logged in.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "You are logged in.", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.moviesFragment)
-
                 } else {
-                    Toast.makeText(context, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, task.exception?.message.toString(), Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
     }

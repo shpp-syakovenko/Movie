@@ -8,7 +8,7 @@ import com.serglife.movie.domain.usecase.GetFavoritesMovieUseCase
 import com.serglife.movie.domain.usecase.UpdateFavoritesUseCase
 
 class FavoritesViewModel(
-    private val getFavorites: GetFavoritesMovieUseCase,
+    getFavorites: GetFavoritesMovieUseCase,
     private val updateFavoritesUseCase: UpdateFavoritesUseCase
     ) : ViewModel() {
 

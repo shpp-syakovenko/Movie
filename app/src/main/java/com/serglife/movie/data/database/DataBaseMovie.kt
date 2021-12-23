@@ -11,7 +11,6 @@ class DataBaseMovie {
 
     val movies = MutableSharedFlow<List<Movie>>(1, 10)
 
-
     fun listenMovies() {
         REF_DATABASE_ROOT.child(AUTH.uid.toString()).child(NODE_MOVIES)
             .addValueEventListener(object : ValueEventListener {
@@ -75,6 +74,5 @@ class DataBaseMovie {
 
                 override fun onCancelled(error: DatabaseError) {}
             })
-
     }
 }

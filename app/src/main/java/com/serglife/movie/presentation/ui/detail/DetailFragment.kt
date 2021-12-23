@@ -3,11 +3,9 @@ package com.serglife.movie.presentation.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -15,7 +13,6 @@ import com.serglife.movie.R
 import com.serglife.movie.core.adapter.TypeAdapter
 import com.serglife.movie.data.common.ConstantNetwork
 import com.serglife.movie.data.database.AUTH
-import com.serglife.movie.data.database.DataBaseMovie
 import com.serglife.movie.databinding.FragmentDetailBinding
 import com.serglife.movie.domain.entity.Movie
 import com.serglife.movie.domain.entity.Trailer
@@ -50,7 +47,6 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
         vm.detailItems.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
-
 
         if (AUTH.currentUser != null) {
             vm.updateFavorites()
@@ -94,24 +90,14 @@ class DetailFragment : Fragment(), ClickTrailerListener, ClickMovieListener {
     override fun clickAddOrDeleteMovieFromFavorites(movie: Movie) {
         if (AUTH.currentUser != null) {
             if (movie.isFavorites) {
-                vm.deleteFavorites(movie) {
-                    Toast.makeText(
-                        context,
-                        "This movie delete from favorites!!!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                vm.deleteFavorites(movie)
             } else {
-                vm.addFavorites(movie) {
-                    Toast.makeText(context, "This movie add to favorites!!!", Toast.LENGTH_SHORT)
-                        .show()
-                }
+                vm.addFavorites(movie)
             }
         } else {
             findNavController().navigate(R.id.inLoginFragment)
         }
     }
-
 
     override fun clickTrailer(trailer: Trailer) {
         val intent = Intent(
